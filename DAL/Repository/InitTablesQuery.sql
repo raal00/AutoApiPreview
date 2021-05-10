@@ -46,6 +46,7 @@ GO
 CREATE TABLE [dbo].[Order] (
 	[Id] INT PRIMARY KEY IDENTITY(0, 1),
 	[CarId] INT NOT NULL,
+	[CarModel] NVARCHAR NULL,
 	[AssociateId] INT NOT NULL,
 	[SystemNumber] NVARCHAR(50) NOT NULL,
 	[OrderDate] DATE NOT NULL,

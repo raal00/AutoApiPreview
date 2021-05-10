@@ -116,5 +116,12 @@ namespace AutoApi.Controllers
             }
             return response;
         }
+
+        [HttpGet]
+        [Route("isauthenticated")]
+        public async Task<bool> IsAuthenticated()
+        {
+            return HttpContext.User.Identity.IsAuthenticated;
+        }
     }
 }

@@ -8,6 +8,7 @@ namespace BLL.DomainModels
     {
         public int Id { get; set; }
         public int CarId { get; set; }
+        public string CarModel { get; set; }
         public string SystemNumber { get; set; }
         public DateTime OrderDate { get; set; }
     }

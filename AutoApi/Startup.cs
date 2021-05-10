@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using BLL.DomainModels;
 using BLL.Services;
 using BLL.Services.Abstraction;
+using BLL.Services.Implementation;
 using DAL.Converters;
 using DAL.Converters.Abstraction;
 using DAL.PersistModels;
@@ -92,6 +93,7 @@ namespace AutoApi
             services.AddTransient<IRoleRepository<RoleDomain>, RoleRepository<RoleDomain>>();
 
             services.AddTransient<IAuthService, AuthService>();
+            services.AddTransient<IClientService, ClientService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
