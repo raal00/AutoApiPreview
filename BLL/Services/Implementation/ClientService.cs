@@ -72,12 +72,16 @@ namespace BLL.Services.Implementation
             GetAutoModelsResponseModel response = new GetAutoModelsResponseModel();
             var cars = carRepository.Get().ToList();
 
-            if (request.OrderBy != null)
+            if (!string.IsNullOrEmpty(request.OrderBy))
             {
                 try
                 {
                     var orderByParam = typeof(CarDomain).GetProperty(request.OrderBy);
-                    cars = cars.OrderBy(x => orderByParam.GetValue(x, null)).ToList();
+                    if (orderByParam != null)
+                    {
+                        var res = cars.OrderBy(x => $"{(string)orderByParam.GetValue(x, null)} asc") ;
+                        if (res != null) cars = res.ToList();
+                    }
                 }
                 catch (Exception er)
                 {
@@ -86,7 +90,7 @@ namespace BLL.Services.Implementation
                     return response;
                 }
             }
-            if (request.Type != null)
+            if (!string.IsNullOrEmpty(request.Type))
             {
                 cars = cars.Where(x => x.Type == request.Type).ToList();
             }
@@ -113,7 +117,7 @@ namespace BLL.Services.Implementation
             {
                 var stat = (from order in orderRepository.Get()
                             where order.OrderDate >= request.From && order.OrderDate <= request.To
-                            group order by order.AssociateId);
+                            group order by order.AssociateId).ToList();
 
                 response.Statistics = new List<OrderStatisticModel>();
                 var clients = associateRepository.Get(x => stat.Select(y => y.Key).Contains(x.Id)).ToList();
@@ -158,7 +162,9 @@ namespace BLL.Services.Implementation
                 response.ResponseMessage = "Авто не найдено";
                 return response;
             }
+            
             request.Order.CarModel = car.Model;
+            request.Order.AssociateId = request.AssociateId;
 
             request.Order.SystemNumber = Guid.NewGuid().ToString();
             request.Order.OrderDate = DateTime.Now;

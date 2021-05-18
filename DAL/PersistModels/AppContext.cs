@@ -10,7 +10,7 @@ namespace DAL.PersistModels
 {
     public class AppContext : DbContext
     {
-        private const string connectionString = @"Data Source=PERSONAL-PC\SQLEXPRESS;Initial Catalog=AutoApiDB;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+        private const string connectionString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=yestdb;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
         private static AppContext _instance;
 
         public DbSet<AssociatePersist> Associates { get; set; }

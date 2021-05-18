@@ -37,6 +37,8 @@ namespace AutoApi
         {
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(option => {
                 option.LoginPath = "/";
+                option.Cookie.SameSite = 0;
+                option.Cookie.SecurePolicy = CookieSecurePolicy.SameAsRequest;
                 option.Events = new CookieAuthenticationEvents()
                 {
                     OnSigningIn = async context =>
@@ -107,6 +109,7 @@ namespace AutoApi
             app.UseStaticFiles();
             app.UseAuthentication();
             app.UseRouting();
+            app.UseCors(builder => builder.WithOrigins("http://localhost:3000").AllowAnyHeader().WithMethods("OPTIONS", "POST", "GET").AllowCredentials()) ;
             app.UseAuthorization();
             app.UseEndpoints(endpoints =>
             {

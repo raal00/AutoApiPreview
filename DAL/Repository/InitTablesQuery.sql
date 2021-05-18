@@ -21,8 +21,8 @@ CREATE TABLE [dbo].[Role] (
 GO
 INSERT INTO [dbo].[Role] ([RoleDisplayName], [RoleSystemName])
 VALUES 
-('Администратор', 'admin'),
-('Пользователь', 'user')
+(N'Администратор', 'admin'),
+(N'Пользователь', 'user')
 GO
 CREATE TABLE [dbo].[AssociateRole] (
 	[Id] INT PRIMARY KEY IDENTITY(0, 1),

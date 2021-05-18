@@ -9,6 +9,7 @@ namespace DAL.PersistModels
     public class CarPersist
     {
         public int Id { get; set; }
+        public string Url { get; set; }
         public string Code { get; set; }
         public string Brand { get; set; }
         public string Model { get; set; }
